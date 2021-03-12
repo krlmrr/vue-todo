@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TodoController extends Controller
@@ -40,7 +41,8 @@ class TodoController extends Controller
      */
     public function show($id)
     {
-        //
+        $todo = Todo::findOrFail($id);
+        return $todo;
     }
 
     /**
@@ -52,7 +54,14 @@ class TodoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $todo = Todo::findOrFail($id);
+
+        $todo->task_name = $request->todo['task_name'];
+        $todo->completed = $request->todo['completed'] ? true : false; 
+        $todo->completed_at = $request->todo['completed'] ? Carbon::now() : null; 
+        $todo->save();
+
+        return $todo;
     }
 
     /**
@@ -63,6 +72,10 @@ class TodoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $todo = Todo::findOrFail($id);
+        $todo->delete();
+
+        $allTodos = Todo::all();
+        return $allTodos;
     }
 }
