@@ -7,7 +7,7 @@
         <title>{{ env('APP_NAME') }}</title>
     </head>
     <body>
-        <div id="app" class="h-screen w-full bg-gray-100">
+        <div id="app">
             <App></App>
         </div>
     </body>
