@@ -2,8 +2,9 @@
 
 namespace Tests\Unit;
 
+use App\Models\Todo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class TaskTest extends TestCase
 {
@@ -14,8 +15,9 @@ class TaskTest extends TestCase
      *
      * @return void
      */
-    public function test_tasks_can_be_returned()
+    public function test_tasks_can_be_stored()
     {
-        $this->assertCount('','1');
+        $task = Todo::factory(4)->create();
+        $this->assertDatabaseCount('todos', 4);
     }
 }
